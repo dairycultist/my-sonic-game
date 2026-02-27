@@ -33,15 +33,17 @@ func _input(event: InputEvent) -> void:
 func _refresh_rolling() -> void:
 	
 	if is_rolling:
+		
 		$PlayerRun.disable()
 		$PlayerBall.enable()
 		
 		$PlayerBall.global_position = $PlayerRun.global_position + Vector3(0.0, 0.5, 0.0)
 		
-		$PlayerBall.linear_velocity = $PlayerRun.velocity.normalized() * $PlayerBall.dash_speed
+		$PlayerBall.linear_velocity = ($PlayerRun/Mesh.global_basis.y + Vector3.UP * 0.5) * $PlayerBall.dash_speed
 		$PlayerBall.angular_velocity = Vector3.UP.cross($PlayerRun.velocity)
 		
 	else:
+		
 		$PlayerBall.disable()
 		$PlayerRun.enable()
 		

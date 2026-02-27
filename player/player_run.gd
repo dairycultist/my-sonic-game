@@ -47,6 +47,8 @@ func _process(delta: float) -> void:
 		
 	else:
 		
+		var prev_speed := Vector2(velocity.x, velocity.z).length()
+		
 		# running
 		var move_global := Vector3(-move.y, 0.0, move.x) * get_parent_node_3d().global_basis
 		
@@ -57,16 +59,17 @@ func _process(delta: float) -> void:
 		move_global *= opposition * run_accel_turn_bonus + 1.0
 		move_global *= run_accel * delta
 		
-		# apply move
+		# apply running
 		velocity.x += move_global.x
 		velocity.z += move_global.z
-		
-	if Vector2(velocity.x, velocity.z).length() > run_speed:
-		
-		var new_velocity := Vector2(velocity.x, velocity.z).normalized() * run_speed
-		
-		velocity.x = new_velocity.x
-		velocity.z = new_velocity.y
+	
+		# when speed is greater than run speed, have speed increase from running
+		if prev_speed > run_speed and Vector2(velocity.x, velocity.z).length() > prev_speed:
+			
+			var new_velocity := Vector2(velocity.x, velocity.z).normalized() * prev_speed
+			
+			velocity.x = new_velocity.x
+			velocity.z = new_velocity.y
 	
 	if not is_on_floor():
 		velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta

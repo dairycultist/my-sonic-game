@@ -3,17 +3,25 @@ extends CharacterBody3D
 @export var run_speed: float = 5.0
 @export var run_accel: float = 20.0
 @export var run_accel_turn_bonus: float = 5.0
-@export var gravity: float = 9.8
 @export var jump_speed: float = 10.0
 
 var orient_up: Vector3 = Vector3.UP
 
+func enable():
+	set_process(true)
+	$Mesh.visible = true
+	$Collider.disabled = false
+
+func disable():
+	set_process(false)
+	$Mesh.visible = false
+	$Collider.disabled = true
+
 func _process(delta: float) -> void:
 	
-	# TODO dashing/balling
-	
-	# jumping
-	if Input.is_action_pressed("jump") and is_on_floor():
+	# jumping (we're using a ray since it's a little more consistent when
+	# jumping out of ball form)
+	if Input.is_action_pressed("jump") and $GroundingRay.is_colliding():
 		velocity.y = jump_speed
 	
 	if Input.is_action_just_released("jump") and velocity.y > jump_speed / 2:
@@ -40,7 +48,7 @@ func _process(delta: float) -> void:
 	else:
 		
 		# running
-		var move_global := Vector3(-move.y, 0.0, move.x) * global_basis
+		var move_global := Vector3(-move.y, 0.0, move.x) * get_parent_node_3d().global_basis
 		
 		# acceleration is higher when changing direction
 		var opposition := Vector3(velocity.x, 0.0, velocity.z).normalized().dot(move_global)
@@ -61,7 +69,7 @@ func _process(delta: float) -> void:
 		velocity.z = new_velocity.y
 	
 	if not is_on_floor():
-		velocity.y -= gravity * delta
+		velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
 	
 	move_and_slide()
 	

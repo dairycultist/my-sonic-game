@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://csd8ddm4erjxn"
-path.s3tc="res://.godot/imported/amy.png-d9f99672b75dd0b5e58eda77375049cd.s3tc.ctex"
+path.s3tc="res://.godot/imported/amy.png-d5f9cc0bde527d63c76af245f868aa0c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://AmyRose/amy.png"
-dest_files=["res://.godot/imported/amy.png-d9f99672b75dd0b5e58eda77375049cd.s3tc.ctex"]
+source_file="res://player/AmyRose/amy.png"
+dest_files=["res://.godot/imported/amy.png-d5f9cc0bde527d63c76af245f868aa0c.s3tc.ctex"]
 
 [params]
 

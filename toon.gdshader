@@ -1,9 +1,10 @@
 shader_type spatial;
 
 uniform sampler2D Albedo: source_color;
+uniform vec3 Color: source_color = vec3(1.0);
 
 void fragment() {
-	ALBEDO = texture(Albedo, UV).rgb;
+	ALBEDO = texture(Albedo, UV).rgb * Color;
 }
 
 void light() {

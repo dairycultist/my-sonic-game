@@ -13,6 +13,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	$PlayerBall/GroundingRay1.global_rotation = Vector3.ZERO
+	$PlayerBall/GroundingRay2.global_rotation = Vector3.ZERO
+	$PlayerBall/GroundingRay3.global_rotation = Vector3.ZERO
+	$PlayerBall/GroundingRay4.global_rotation = Vector3.ZERO
+	
 	# place camera
 	$Camera3D.global_position = lerp($Camera3D.global_position, ($PlayerBall if is_rolling else $PlayerRun).global_position + Vector3(-camera_dist, camera_dist * 0.8, camera_dist), 20.0 * delta)
 	
@@ -24,12 +29,14 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	
+	# dash into a roll
 	if event.is_action_pressed("dash") and not is_rolling:
 		
 		is_rolling = true
 		_refresh_rolling()
 	
-	elif event.is_action_pressed("jump") and is_rolling:
+	# jump out of a roll (if ball is grounded)
+	elif event.is_action_pressed("jump") and ($PlayerBall/GroundingRay1.is_colliding() or $PlayerBall/GroundingRay2.is_colliding() or $PlayerBall/GroundingRay3.is_colliding() or $PlayerBall/GroundingRay4.is_colliding()) and is_rolling:
 		
 		is_rolling = false
 		_refresh_rolling()
@@ -43,7 +50,7 @@ func _refresh_rolling() -> void:
 		
 		$PlayerBall.global_position = $PlayerRun.global_position + Vector3(0.0, 0.5, 0.0)
 		
-		$PlayerBall.linear_velocity = ($PlayerRun/Mesh.global_basis.y + Vector3.UP * 0.5) * max($PlayerBall.dash_speed, $PlayerRun.velocity.length())
+		$PlayerBall.linear_velocity = ($PlayerRun/Mesh.global_basis.y + Vector3.UP * 0.5).normalized() * max($PlayerBall.dash_speed, $PlayerRun.velocity.length())
 		$PlayerBall.angular_velocity = Vector3.UP.cross($PlayerBall.linear_velocity)
 		
 	else:

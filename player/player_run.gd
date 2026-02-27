@@ -63,7 +63,8 @@ func _process(delta: float) -> void:
 		velocity.x += move_global.x
 		velocity.z += move_global.z
 	
-		# when speed is greater than run speed, have speed increase from running
+		# when current speed is greater than run_speed, speed cannot increase from running
+		# (allows for maintaining speeds greater than run_speed after exiting a roll)
 		if prev_speed > run_speed and Vector2(velocity.x, velocity.z).length() > prev_speed:
 			
 			var new_velocity := Vector2(velocity.x, velocity.z).normalized() * prev_speed

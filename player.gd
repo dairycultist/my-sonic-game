@@ -6,6 +6,8 @@ extends CharacterBody3D
 @export var gravity: float = 9.8
 @export var jump_speed: float = 10.0
 
+var orient_up: Vector3 = Vector3.UP
+
 func _process(delta: float) -> void:
 	
 	# TODO dashing/balling
@@ -17,11 +19,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("jump") and velocity.y > jump_speed / 2:
 		velocity.y = jump_speed / 2
 	
-	# running
 	var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	if move == Vector2.ZERO:
 		
+		# drag
 		if Vector2(velocity.x, velocity.z).length_squared() < 1.0:
 		
 			velocity.x = 0
@@ -37,7 +39,8 @@ func _process(delta: float) -> void:
 		
 	else:
 		
-		var move_global := Vector3(move.x, 0.0, move.y) * global_basis
+		# running
+		var move_global := Vector3(-move.y, 0.0, move.x) * global_basis
 		
 		# acceleration is higher when changing direction
 		var opposition := Vector3(velocity.x, 0.0, velocity.z).normalized().dot(move_global)
@@ -62,6 +65,7 @@ func _process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	# turn mesh towards direction of motion
-	if Vector2(velocity.x, velocity.z).length_squared() > 1.0:
-		$Mesh.global_rotation.y = lerp_angle($Mesh.global_rotation.y, atan2(velocity.x, velocity.z) - PI/2, 10.0 * delta)
+	# turn mesh towards direction of motion, orienting up with floor normal
+	orient_up = lerp(orient_up, get_floor_normal() if is_on_floor() else Vector3.UP, 10.0 * delta)
+		
+	$Mesh.look_at(orient_up + $Mesh.global_position, Vector3(velocity.x, 0.0, velocity.z) if (Vector2(velocity.x, velocity.z).length_squared() > 1.0) else $Mesh.global_basis.y, true)

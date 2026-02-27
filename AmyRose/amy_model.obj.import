@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bsted2k4jich2"
+path="res://.godot/imported/amy_model.obj-701ae67f044016085618b2a4c338150f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/amy_model.obj-701ae67f044016085618b2a4c338150f.mesh"]
+
+source_file="res://AmyRose/amy_model.obj"
+dest_files=["res://.godot/imported/amy_model.obj-701ae67f044016085618b2a4c338150f.mesh", "res://.godot/imported/amy_model.obj-701ae67f044016085618b2a4c338150f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(0.05, 0.05, 0.05)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

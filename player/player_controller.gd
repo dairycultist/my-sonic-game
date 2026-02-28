@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	$Camera3D.global_position = lerp($Camera3D.global_position, ($PlayerBall if is_rolling else $PlayerRun).global_position + Vector3(-camera_dist, camera_dist * 0.8, camera_dist), 20.0 * delta)
 	
 	# stop rolling if speed is too slow
-	if is_rolling and $PlayerBall.linear_velocity.length() < 10.0:
+	if is_rolling and $PlayerBall.linear_velocity.length() < $PlayerBall.dash_speed * 0.8:
 		
 		is_rolling = false
 		_refresh_rolling()
@@ -43,10 +43,13 @@ func _refresh_rolling() -> void:
 	
 	if is_rolling:
 		
-		$PlayerRun.disable()
-		$PlayerBall.enable()
+		var y = $PlayerRun.global_position.y
 		
-		$PlayerBall.global_position = $PlayerRun.global_position + Vector3(0.0, 0.5, 0.0)
+		$PlayerRun.disable()
+		$PlayerRun.global_position.y = 1000.0
+		
+		$PlayerBall.enable()
+		$PlayerBall.global_position = Vector3($PlayerRun.global_position.x, y + 0.5, $PlayerRun.global_position.z)
 		
 		# dash ball in direction of input
 		var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -57,9 +60,12 @@ func _refresh_rolling() -> void:
 		
 	else:
 		
-		$PlayerBall.disable()
-		$PlayerRun.enable()
+		var y = $PlayerBall.global_position.y
 		
-		$PlayerRun.global_position = $PlayerBall.global_position - Vector3(0.0, 0.5, 0.0)
+		$PlayerBall.disable()
+		$PlayerBall.global_position.y = 1000.0
+		
+		$PlayerRun.enable()
+		$PlayerRun.global_position = Vector3($PlayerBall.global_position.x, y - 0.5, $PlayerBall.global_position.z)
 		
 		$PlayerRun.velocity = $PlayerBall.linear_velocity

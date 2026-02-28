@@ -1,7 +1,7 @@
 extends RigidBody3D
 
-var dash_speed: float = 20.0
-var roll_acceleration: float = 20.0
+@export var dash_speed: float = 20.0
+@export var roll_acceleration: float = 20.0
 
 func enable():
 	set_process(true)

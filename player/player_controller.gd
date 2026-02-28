@@ -26,17 +26,15 @@ func _process(delta: float) -> void:
 		
 		is_rolling = false
 		_refresh_rolling()
-
-func _input(event: InputEvent) -> void:
 	
 	# dash into a roll
-	if event.is_action_pressed("dash") and not is_rolling:
+	if Input.is_action_just_pressed("dash") and not is_rolling:
 		
 		is_rolling = true
 		_refresh_rolling()
 	
 	# jump out of a roll (if ball is grounded)
-	elif event.is_action_pressed("jump") and ($PlayerBall/GroundingRay1.is_colliding() or $PlayerBall/GroundingRay2.is_colliding() or $PlayerBall/GroundingRay3.is_colliding() or $PlayerBall/GroundingRay4.is_colliding()) and is_rolling:
+	elif Input.is_action_just_pressed("jump") and is_rolling and ($PlayerBall/GroundingRay1.is_colliding() or $PlayerBall/GroundingRay2.is_colliding() or $PlayerBall/GroundingRay3.is_colliding() or $PlayerBall/GroundingRay4.is_colliding()):
 		
 		is_rolling = false
 		_refresh_rolling()
@@ -50,7 +48,11 @@ func _refresh_rolling() -> void:
 		
 		$PlayerBall.global_position = $PlayerRun.global_position + Vector3(0.0, 0.5, 0.0)
 		
-		$PlayerBall.linear_velocity = ($PlayerRun/Mesh.global_basis.y + Vector3.UP * 0.5).normalized() * max($PlayerBall.dash_speed, $PlayerRun.velocity.length())
+		# dash ball in direction of input
+		var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		var move_global: Vector3 = (Vector3(-move.y, 0.0, move.x) * global_basis) if (move != Vector2.ZERO) else ($PlayerRun/Mesh.global_basis.y)
+		
+		$PlayerBall.linear_velocity = (move_global + Vector3.UP * 0.5).normalized() * max($PlayerBall.dash_speed, Vector2($PlayerRun.velocity.x, $PlayerRun.velocity.z).length())
 		$PlayerBall.angular_velocity = Vector3.UP.cross($PlayerBall.linear_velocity)
 		
 	else:

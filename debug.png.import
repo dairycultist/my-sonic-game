@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh520vrj83vs1"
-path.s3tc="res://.godot/imported/6B2D96F_c.bmp-e277bf350a86ece59a3d6ceec5c5076d.s3tc.ctex"
+uid="uid://ofve2nvpwjvu"
+path.s3tc="res://.godot/imported/debug.png-ee3fc424660186d9e01e865e57ffb986.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://BobombBattlefield/6B2D96F_c.bmp"
-dest_files=["res://.godot/imported/6B2D96F_c.bmp-e277bf350a86ece59a3d6ceec5c5076d.s3tc.ctex"]
+source_file="res://debug.png"
+dest_files=["res://.godot/imported/debug.png-ee3fc424660186d9e01e865e57ffb986.s3tc.ctex"]
 
 [params]
 

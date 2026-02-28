@@ -8,10 +8,13 @@
 - Some collectables are obvious, some take skill (time-trial collectables), some are hidden; good
 for a range of players
 - No lose condition (I find this more fun, less frustrating)
-- huge open world with different regions/POIs; ramps, slides, bouncers
+- huge open world with different regions/POIs; ramps, slides, bouncers, tubes, accelerators
 
-The player by default runs at a moderate pace, but you can also dash forward, rolling into a ball
-which turns you into a physics object (with an air dash for air control).
+The player by default runs at a moderate pace, but which can be exceeded by
+entering a ball form, which both dashes the player in the held direction
+(allowing for the player to instantly change direction) and allows the player
+to build up speed by going downhill. The running form has the benefit of having
+more control, making much sharper turns than the ball form.
 
 "Water" which is really just a flat texture that creates a splash particle effect when
 landed/walked on.

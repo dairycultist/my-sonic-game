@@ -16,8 +16,16 @@ void vertex() {
 
 void fragment() {
 	
+	// doesn't appear at x=0 / z=0, might be a problem with mod
+	float checkerboard_edge_wobble =
+		  sin(world_position.x * 12.3) * 0.002
+		+ sin(world_position.z * 12.3) * 0.002;
+	
 	// checkerboard pattern
-	vec2 mod_pos_a = mod(world_position.xz * checkerboard_scale, 1.0);
+	vec2 mod_pos_a = mod(
+		  world_position.xz * checkerboard_scale
+		+ checkerboard_edge_wobble,
+	1.0);
 
 	vec3 a = vec3(
 		  smoothstep(0.5, 0.5 + blur, mod_pos_a.x)
@@ -27,7 +35,10 @@ void fragment() {
 		+ smoothstep(blur,       0.0, mod_pos_a.y)
 	);
 	
-	vec2 mod_pos_b = mod(world_position.xz * checkerboard_scale + vec2(0.5), 1.0);
+	vec2 mod_pos_b = mod(
+		  world_position.xz * checkerboard_scale + vec2(0.5)
+		+ checkerboard_edge_wobble,
+	1.0);
 	
 	vec3 b = vec3(
 		  smoothstep(0.5, 0.5 + blur, mod_pos_b.x)

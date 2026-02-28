@@ -39,7 +39,7 @@ shader_parameter/contrast = 1.5
 shader_parameter/Color = Color(0.47641352, 0.6376995, 0.26294678, 1)
 shader_parameter/ColorAlt = Color(0.42400065, 0.58688194, 0.22367927, 1)
 shader_parameter/checkerboard_scale = 0.1
-shader_parameter/blur = 0.0999999977648
+shader_parameter/blur = 0.01999999955296
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_wse8f"]
 

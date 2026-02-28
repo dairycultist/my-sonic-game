@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dsjgkjkyr04g3"]
+
+[ext_resource type="Shader" uid="uid://ofl3tvfhtx86" path="res://outline.gdshader" id="1_4apbf"]
+[ext_resource type="Shader" uid="uid://4qv27ov06cmn" path="res://toon.gdshader" id="2_vb3wf"]
+[ext_resource type="Texture2D" uid="uid://csd8ddm4erjxn" path="res://player/AmyRose/amy.png" id="3_tkiyx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkg7o"]
+render_priority = 0
+shader = ExtResource("1_4apbf")
+shader_parameter/color = Color(0.31764707, 0, 0.21568628, 1)
+shader_parameter/size = 0.02999999932944
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_pkg7o")
+shader = ExtResource("2_vb3wf")
+shader_parameter/Albedo = ExtResource("3_tkiyx")
+shader_parameter/Color = Color(1, 1, 1, 1)

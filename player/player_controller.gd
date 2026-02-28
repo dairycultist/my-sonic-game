@@ -13,13 +13,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	# place camera
+	$Camera3D.global_position = lerp($Camera3D.global_position, ($PlayerBall if is_rolling else $PlayerRun).global_position + Vector3(-camera_dist, camera_dist * 0.8, camera_dist), 20.0 * delta)
+
+func _physics_process(_delta: float) -> void:
+	
 	$PlayerBall/GroundingRay1.global_rotation = Vector3.ZERO
 	$PlayerBall/GroundingRay2.global_rotation = Vector3.ZERO
 	$PlayerBall/GroundingRay3.global_rotation = Vector3.ZERO
 	$PlayerBall/GroundingRay4.global_rotation = Vector3.ZERO
-	
-	# place camera
-	$Camera3D.global_position = lerp($Camera3D.global_position, ($PlayerBall if is_rolling else $PlayerRun).global_position + Vector3(-camera_dist, camera_dist * 0.8, camera_dist), 20.0 * delta)
 	
 	# stop rolling if speed is too slow
 	if is_rolling and $PlayerBall.linear_velocity.length() < $PlayerBall.dash_speed * 0.8:
@@ -45,27 +47,32 @@ func _refresh_rolling() -> void:
 		
 		var y = $PlayerRun.global_position.y
 		
+		# disable PlayerRun
 		$PlayerRun.disable()
 		$PlayerRun.global_position.y = 1000.0
 		
+		# enable PlayerBall
 		$PlayerBall.enable()
 		$PlayerBall.global_position = Vector3($PlayerRun.global_position.x, y + 0.5, $PlayerRun.global_position.z)
 		
-		# dash ball in direction of input
+		# dash PlayerBall in direction of input
 		var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		var move_global: Vector3 = (Vector3(-move.y, 0.0, move.x) * global_basis) if (move != Vector2.ZERO) else ($PlayerRun/Mesh.global_basis.y)
 		
-		$PlayerBall.linear_velocity = (move_global + Vector3.UP * 0.5).normalized() * max($PlayerBall.dash_speed, Vector2($PlayerRun.velocity.x, $PlayerRun.velocity.z).length())
+		$PlayerBall.linear_velocity = (move_global.normalized() + Vector3.UP * 0.5) * $PlayerBall.dash_speed
 		$PlayerBall.angular_velocity = Vector3.UP.cross($PlayerBall.linear_velocity)
 		
 	else:
 		
 		var y = $PlayerBall.global_position.y
 		
+		# copy velocity from PlayerBall to PlayerRun
+		$PlayerRun.velocity = $PlayerBall.linear_velocity
+		
+		# disable PlayerBall
 		$PlayerBall.disable()
 		$PlayerBall.global_position.y = 1000.0
 		
+		# enable PlayerRun
 		$PlayerRun.enable()
 		$PlayerRun.global_position = Vector3($PlayerBall.global_position.x, y - 0.5, $PlayerBall.global_position.z)
-		
-		$PlayerRun.velocity = $PlayerBall.linear_velocity

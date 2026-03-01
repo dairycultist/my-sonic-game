@@ -56,14 +56,16 @@ func _refresh_rolling() -> void:
 		# dash PlayerBall in direction of input, unless WallBounceRay is colliding,
 		# in which case we're trying to dash into a wall (which would cause us
 		# to immediately exit the ball state, allowing us to scale walls), in which
-		# case simply dash opposite to the direction of input
+		# case simply dash opposite to the direction of input with no vertical
 		var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-		var move_global: Vector3 = (Vector3(-move.y, 0.0, move.x) * global_basis) if (move != Vector2.ZERO) else ($PlayerRun/Mesh.global_basis.y)
+		var move_global: Vector3 = ((Vector3(-move.y, 0.0, move.x) * global_basis) if (move != Vector2.ZERO) else ($PlayerRun/Mesh.global_basis.y)).normalized()
 		
 		if wall_bounce:
 			move_global = -move_global
+		else:
+			move_global += Vector3.UP * 0.5
 		
-		$PlayerBall.linear_velocity = (move_global.normalized() + Vector3.UP * 0.5) * $PlayerBall.dash_speed
+		$PlayerBall.linear_velocity = move_global * $PlayerBall.dash_speed
 		$PlayerBall.angular_velocity = Vector3.UP.cross($PlayerBall.linear_velocity)
 		
 	else:

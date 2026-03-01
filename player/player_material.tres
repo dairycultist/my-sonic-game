@@ -8,7 +8,7 @@
 render_priority = 0
 shader = ExtResource("1_4apbf")
 shader_parameter/color = Color(0.31764707, 0, 0.21568628, 1)
-shader_parameter/size = 0.02999999932944
+shader_parameter/size = 0.06999999843536
 
 [resource]
 render_priority = 0

@@ -19,6 +19,9 @@ func disable():
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 
+func _process(_delta: float) -> void:
+	$RotationLock.global_rotation = Vector3.ZERO
+
 func _physics_process(_delta: float) -> void:
 	
 	var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")

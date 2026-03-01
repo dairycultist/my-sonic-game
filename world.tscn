@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ijvvsu0qx76"]
+[gd_scene load_steps=37 format=3 uid="uid://ijvvsu0qx76"]
 
 [ext_resource type="Shader" uid="uid://ppr66hfy4uf3" path="res://world/grass.gdshader" id="1_ic0uy"]
 [ext_resource type="Script" uid="uid://b5qwsyyjbq3g7" path="res://player/player_run.gd" id="2_aqk2v"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bbu03mjsan8ut" path="res://player/AmyRose/amy_model.glb" id="7_wse8f"]
 [ext_resource type="Script" uid="uid://esv6y77rs2gh" path="res://player/player_ball.gd" id="8_gbfbk"]
 [ext_resource type="Material" uid="uid://dsjgkjkyr04g3" path="res://player/player_material.tres" id="8_ic0uy"]
+[ext_resource type="Texture2D" uid="uid://cgkh6qo4jlpw" path="res://player/shadow.png" id="14_70uel"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k3n1d"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -332,7 +333,6 @@ environment = SubResource("Environment_70uel")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.39262614, 0.91969824, 0, -0.91969824, -0.39262614, 0, 0, 0)
-shadow_enabled = true
 shadow_opacity = 0.6
 
 [node name="Map" type="StaticBody3D" parent="."]
@@ -428,40 +428,60 @@ bones/13/rotation = Quaternion(0.2431072, -0.20137906, -0.63029224, 0.7092793)
 bones/13/scale = Vector3(1.0000002, 1.0000002, 0.9999997)
 
 [node name="amy_model" parent="Player/PlayerRun/Mesh/Armature/Skeleton3D" index="0"]
+layers = 2
 surface_material_override/0 = ExtResource("8_ic0uy")
 
 [node name="Collider" type="CollisionShape3D" parent="Player/PlayerRun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_tlwt5")
 
+[node name="ShadowDecal" type="Decal" parent="Player/PlayerRun"]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, -3.5527135e-15, 0.99999976, 0, -4, 0)
+size = Vector3(2, 10, 2)
+texture_albedo = ExtResource("14_70uel")
+albedo_mix = 0.8
+upper_fade = 1e-05
+cull_mask = 1
+
 [node name="GroundingRay" type="RayCast3D" parent="Player/PlayerRun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09020996, 0)
 target_position = Vector3(0, -0.48, 0)
 
 [node name="PlayerBall" type="RigidBody3D" parent="Player"]
-transform = Transform3D(0.7071068, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071068, 0, 10, 0)
+transform = Transform3D(0.7071068, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071068, 1.144746, -2.9707932, 1.144746)
 collision_layer = 0
 center_of_mass_mode = 1
 can_sleep = false
 script = ExtResource("8_gbfbk")
 
 [node name="Mesh" type="MeshInstance3D" parent="Player/PlayerBall"]
+layers = 2
 mesh = SubResource("SphereMesh_dwbse")
 surface_material_override/0 = SubResource("ShaderMaterial_dwbse")
 
 [node name="Collider" type="CollisionShape3D" parent="Player/PlayerBall"]
 shape = SubResource("SphereShape3D_dwbse")
 
-[node name="GroundingRay1" type="RayCast3D" parent="Player/PlayerBall"]
+[node name="RotationLock" type="Node3D" parent="Player/PlayerBall"]
+
+[node name="ShadowDecal" type="Decal" parent="Player/PlayerBall/RotationLock"]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, -3.5527137e-15, 0.9999998, 0, -5, 0)
+size = Vector3(2, 10, 2)
+texture_albedo = ExtResource("14_70uel")
+albedo_mix = 0.8
+upper_fade = 1e-05
+cull_mask = 1
+
+[node name="GroundingRay1" type="RayCast3D" parent="Player/PlayerBall/RotationLock"]
 target_position = Vector3(0.5, -1.5, 0.5)
 
-[node name="GroundingRay2" type="RayCast3D" parent="Player/PlayerBall"]
+[node name="GroundingRay2" type="RayCast3D" parent="Player/PlayerBall/RotationLock"]
 target_position = Vector3(0.5, -1.5, -0.5)
 
-[node name="GroundingRay3" type="RayCast3D" parent="Player/PlayerBall"]
+[node name="GroundingRay3" type="RayCast3D" parent="Player/PlayerBall/RotationLock"]
 target_position = Vector3(-0.5, -1.5, 0.5)
 
-[node name="GroundingRay4" type="RayCast3D" parent="Player/PlayerBall"]
+[node name="GroundingRay4" type="RayCast3D" parent="Player/PlayerBall/RotationLock"]
 target_position = Vector3(-0.5, -1.5, -0.5)
 
 [node name="Label" type="Label" parent="."]

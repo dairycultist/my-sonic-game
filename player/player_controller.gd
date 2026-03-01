@@ -18,10 +18,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	
-	$PlayerBall/GroundingRay1.global_rotation = Vector3.ZERO
-	$PlayerBall/GroundingRay2.global_rotation = Vector3.ZERO
-	$PlayerBall/GroundingRay3.global_rotation = Vector3.ZERO
-	$PlayerBall/GroundingRay4.global_rotation = Vector3.ZERO
+	$PlayerBall/RotationLock.global_rotation = Vector3.ZERO
 	
 	# stop rolling if speed is too slow
 	if is_rolling and $PlayerBall.linear_velocity.length() < $PlayerBall.dash_speed * 0.8:
@@ -36,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 		_refresh_rolling()
 	
 	# jump out of a roll (if ball is grounded)
-	elif Input.is_action_just_pressed("jump") and is_rolling and ($PlayerBall/GroundingRay1.is_colliding() or $PlayerBall/GroundingRay2.is_colliding() or $PlayerBall/GroundingRay3.is_colliding() or $PlayerBall/GroundingRay4.is_colliding()):
+	elif Input.is_action_just_pressed("jump") and is_rolling and ($PlayerBall/RotationLock/GroundingRay1.is_colliding() or $PlayerBall/RotationLock/GroundingRay2.is_colliding() or $PlayerBall/RotationLock/GroundingRay3.is_colliding() or $PlayerBall/RotationLock/GroundingRay4.is_colliding()):
 		
 		is_rolling = false
 		_refresh_rolling()

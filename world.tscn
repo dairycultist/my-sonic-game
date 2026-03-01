@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ijvvsu0qx76"]
+[gd_scene load_steps=51 format=3 uid="uid://ijvvsu0qx76"]
 
 [ext_resource type="Script" uid="uid://t2idhmv30x7i" path="res://scene_transition/scene_transitioner.gd" id="1_2u3nc"]
 [ext_resource type="AudioStream" uid="uid://dtptidpc4ftvt" path="res://scene_transition/slide_whistle.mp3" id="1_70uel"]
@@ -743,15 +743,15 @@ _data = {
 &"run": SubResource("Animation_ic0uy")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkg7o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbp6q"]
 render_priority = 0
 shader = ExtResource("4_dwbse")
 shader_parameter/color = Color(0.31764707, 0, 0.21568628, 1)
-shader_parameter/size = 0.06999999843536
+shader_parameter/size = 0.0999999977648
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ikiii"]
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_pkg7o")
+next_pass = SubResource("ShaderMaterial_cbp6q")
 shader = ExtResource("4_aqk2v")
 shader_parameter/Color = Color(1, 0.5638808, 0.79710066, 1)
 
@@ -762,6 +762,12 @@ radius = 0.65
 height = 1.3
 radial_segments = 8
 rings = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkg7o"]
+render_priority = 0
+shader = ExtResource("4_dwbse")
+shader_parameter/color = Color(0.31764707, 0, 0.21568628, 1)
+shader_parameter/size = 0.0499999988824
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwbse"]
 render_priority = 0
@@ -947,7 +953,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09020996, 0)
 target_position = Vector3(0, -0.48, 0)
 
 [node name="PlayerBall" type="RigidBody3D" parent="Player"]
-transform = Transform3D(0.7071068, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071068, 1.144746, -2.9707932, 1.144746)
+transform = Transform3D(0.7071068, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071068, 1.144746, -6.9707932, 1.144746)
 collision_layer = 0
 center_of_mass_mode = 1
 can_sleep = false

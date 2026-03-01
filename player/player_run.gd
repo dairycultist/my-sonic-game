@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 	# jumping out of ball form)
 	if Input.is_action_pressed("jump") and $GroundingRay.is_colliding():
 		velocity.y = jump_speed
+		get_parent().get_node("JumpAudio").play()
 	
 	if Input.is_action_just_released("jump") and velocity.y > jump_speed / 2:
 		velocity.y = jump_speed / 2

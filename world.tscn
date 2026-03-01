@@ -590,21 +590,6 @@ tracks/13/path = NodePath("Mesh/Armature/Skeleton3D:LeftFoot")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0.2391838, -0.029808134, -0.23542723, 0.94152886)
-tracks/14/type = "audio"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("../Audio")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("11_udxuc")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/14/use_blend = true
 
 [sub_resource type="Animation" id="Animation_ic0uy"]
 resource_name = "run"
@@ -869,6 +854,9 @@ max_polyphony = 20
 [node name="DashAudio" type="AudioStreamPlayer" parent="Player"]
 stream = ExtResource("10_cbp6q")
 max_polyphony = 20
+
+[node name="JumpAudio" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("11_udxuc")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.89879405, 0.43837118, 0, -0.4383712, 0.8987942, 0, 12, 20)

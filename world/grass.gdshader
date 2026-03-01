@@ -3,10 +3,14 @@ shader_type spatial;
 uniform sampler2D Albedo: source_color;
 uniform float albedo_scale = 0.2;
 uniform float contrast = 1.5;
+
 uniform vec3 Color: source_color = vec3(1.0);
 uniform vec3 ColorAlt: source_color = vec3(0.8);
 uniform float checkerboard_scale = 0.1;
 uniform float blur: hint_range(0.0, 0.5, 0.01) = 0.1;
+
+uniform float wind_speed = 4;
+uniform float wind_intensity: hint_range(0.0, 0.1, 0.005) = 0.01;
 
 varying vec3 world_position;
 
@@ -49,7 +53,7 @@ void fragment() {
 	);
 	
 	// color and texture
-	vec2 uv = world_position.xz * albedo_scale + sin(TIME * 2.0 + world_position.x) * 0.01;
+	vec2 uv = world_position.xz * albedo_scale + sin(TIME * wind_speed + world_position.x) * wind_intensity;
 	
 	ALBEDO = pow(texture(Albedo, uv).rgb, vec3(contrast)) * mix(Color, ColorAlt, a + b);
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ijvvsu0qx76"]
+[gd_scene load_steps=50 format=3 uid="uid://ijvvsu0qx76"]
 
 [ext_resource type="Script" uid="uid://t2idhmv30x7i" path="res://scene_transition/scene_transitioner.gd" id="1_2u3nc"]
 [ext_resource type="AudioStream" uid="uid://dtptidpc4ftvt" path="res://scene_transition/slide_whistle.mp3" id="1_70uel"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://bbu03mjsan8ut" path="res://player/AmyRose/amy_model.glb" id="7_wse8f"]
 [ext_resource type="Script" uid="uid://esv6y77rs2gh" path="res://player/player_ball.gd" id="8_gbfbk"]
 [ext_resource type="Material" uid="uid://dsjgkjkyr04g3" path="res://player/player_material.tres" id="8_ic0uy"]
+[ext_resource type="AudioStream" uid="uid://c7rvi1xy5k7tq" path="res://player/dash.wav" id="10_cbp6q"]
+[ext_resource type="AudioStream" uid="uid://b7th1qfk1evky" path="res://player/jump.wav" id="11_udxuc"]
+[ext_resource type="AudioStream" uid="uid://c2aatn3x6suod" path="res://player/step.wav" id="12_ikiii"]
 [ext_resource type="Texture2D" uid="uid://cgkh6qo4jlpw" path="res://player/shadow.png" id="14_70uel"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2u3nc"]
@@ -489,6 +492,7 @@ tracks/13/keys = PackedFloat32Array(0, 1, 0.2431072, -0.20137906, -0.63029224, 0
 
 [sub_resource type="Animation" id="Animation_2o6r5"]
 resource_name = "jump"
+length = 20.0
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -587,6 +591,21 @@ tracks/13/path = NodePath("Mesh/Armature/Skeleton3D:LeftFoot")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0.2391838, -0.029808134, -0.23542723, 0.94152886)
+tracks/14/type = "audio"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../Audio")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_udxuc")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/14/use_blend = true
 
 [sub_resource type="Animation" id="Animation_ic0uy"]
 resource_name = "run"
@@ -696,6 +715,25 @@ tracks/14/path = NodePath("Mesh/Armature/Skeleton3D:RightLeg")
 tracks/14/interp = 0
 tracks/14/loop_wrap = true
 tracks/14/keys = PackedFloat32Array(0, 1, -0.50565195, -0.4071641, -0.40942314, 0.6410197, 0.25, 1, -0.649144, 0.0358924, -0.043854285, 0.7585517, 0.5, 1, -0.55612487, 0.46587157, 0.33769247, 0.5997105, 0.75, 1, -0.649144, 0.03589233, -0.043854326, 0.7585516)
+tracks/15/type = "audio"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("../Audio")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_ikiii")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_ikiii")
+}],
+"times": PackedFloat32Array(0.25, 0.75)
+}
+tracks/15/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k3n1d"]
 _data = {
@@ -813,6 +851,13 @@ shape = SubResource("ConcavePolygonShape3D_wse8f")
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0, 0)
 script = ExtResource("2_pkg7o")
 camera_dist = 20
+
+[node name="Audio" type="AudioStreamPlayer" parent="Player"]
+max_polyphony = 20
+
+[node name="DashAudio" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("10_cbp6q")
+max_polyphony = 20
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1.0000001, 0, 0, 0, 0.89879405, 0.43837118, 0, -0.4383712, 0.8987942, 0, 12, 20)

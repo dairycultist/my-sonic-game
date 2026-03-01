@@ -42,6 +42,8 @@ func _refresh_rolling() -> void:
 	
 	if is_rolling:
 		
+		$DashAudio.play()
+		
 		var y = $PlayerRun.global_position.y
 		var wall_bounce = $PlayerRun/Mesh/WallBounceRay.is_colliding()
 		

@@ -16,6 +16,7 @@ func disable():
 	set_process(false)
 	$Mesh.visible = false
 	$Collider.disabled = true
+	$AnimationPlayer.current_animation = "RESET"
 
 func _process(delta: float) -> void:
 	

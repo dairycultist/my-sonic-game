@@ -22,3 +22,5 @@ landed/walked on.
 Time-trial collectables where you activate them at a start area, then have to reach the end area
 within a certain amount of time. if you fail, you're teleported back to the start area with the
 option to start again; if you succeed, you stay at the end area and get the collectable.
+
+nothing character that you can customize the proportions of, skin tone of, hat of, and face of

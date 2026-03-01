@@ -14,7 +14,6 @@
 [ext_resource type="Shader" uid="uid://ofl3tvfhtx86" path="res://outline.gdshader" id="4_dwbse"]
 [ext_resource type="PackedScene" uid="uid://bbu03mjsan8ut" path="res://player/AmyRose/amy_model.glb" id="7_wse8f"]
 [ext_resource type="Script" uid="uid://esv6y77rs2gh" path="res://player/player_ball.gd" id="8_gbfbk"]
-[ext_resource type="Material" uid="uid://dsjgkjkyr04g3" path="res://player/player_material.tres" id="8_ic0uy"]
 [ext_resource type="AudioStream" uid="uid://c7rvi1xy5k7tq" path="res://player/dash.wav" id="10_cbp6q"]
 [ext_resource type="AudioStream" uid="uid://b7th1qfk1evky" path="res://player/jump.wav" id="11_udxuc"]
 [ext_resource type="AudioStream" uid="uid://c2aatn3x6suod" path="res://player/step.wav" id="12_ikiii"]
@@ -744,6 +743,18 @@ _data = {
 &"run": SubResource("Animation_ic0uy")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkg7o"]
+render_priority = 0
+shader = ExtResource("4_dwbse")
+shader_parameter/color = Color(0.31764707, 0, 0.21568628, 1)
+shader_parameter/size = 0.06999999843536
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ikiii"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_pkg7o")
+shader = ExtResource("4_aqk2v")
+shader_parameter/Color = Color(1, 0.5638808, 0.79710066, 1)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tlwt5"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dwbse"]
@@ -751,12 +762,6 @@ radius = 0.65
 height = 1.3
 radial_segments = 8
 rings = 4
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkg7o"]
-render_priority = 0
-shader = ExtResource("4_dwbse")
-shader_parameter/color = Color(0.31764707, 0, 0.21568628, 1)
-shader_parameter/size = 0.02999999932944
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dwbse"]
 render_priority = 0
@@ -886,40 +891,40 @@ bones/0/position = Vector3(0, -0.09678662, 7.653318e-08)
 bones/0/rotation = Quaternion(-8.557145e-09, 1.216415e-07, -2.081807e-15, 1)
 bones/0/scale = Vector3(1, 1.0000005, 1.0000001)
 bones/1/position = Vector3(1.0619225e-13, 0.925931, -2.4822876e-07)
-bones/1/rotation = Quaternion(-7.105428e-15, -2.1440538e-21, -5.6276293e-15, 1)
+bones/1/rotation = Quaternion(-7.105428e-15, -2.5410988e-21, -5.6276293e-15, 1)
 bones/1/scale = Vector3(1, 1.0000006, 1.0000012)
-bones/2/rotation = Quaternion(-2.3904212e-07, 6.846189e-08, 0.83016175, 0.55752265)
+bones/2/rotation = Quaternion(-2.390421e-07, 6.846189e-08, 0.83016175, 0.55752265)
 bones/2/scale = Vector3(1, 1, 1.0000001)
 bones/3/position = Vector3(0.0002892135, 0.34482068, -1.0300445e-07)
-bones/3/rotation = Quaternion(-6.685976e-08, -2.53966e-07, 0.30720136, 0.95164454)
+bones/3/rotation = Quaternion(-6.6859755e-08, -2.5396602e-07, 0.3072014, 0.95164454)
 bones/3/scale = Vector3(1.0000004, 1.0000005, 1.0000001)
 bones/4/position = Vector3(-4.5619296e-07, 0.88036907, -3.0129172e-08)
-bones/4/rotation = Quaternion(-0.058809936, 0.01495477, -0.24600571, 0.96736705)
+bones/4/rotation = Quaternion(-0.058809936, 0.014954771, -0.2460057, 0.96736705)
 bones/4/scale = Vector3(1.0000001, 1, 1)
 bones/5/rotation = Quaternion(-0.01028291, -0.00690597, -0.8300982, 0.5574797)
 bones/6/position = Vector3(-7.208611e-07, 0.3441144, -1.437136e-07)
-bones/6/rotation = Quaternion(-0.1088279, -0.3149776, -0.28727895, 0.8980069)
+bones/6/rotation = Quaternion(-0.108827904, -0.3149776, -0.28727895, 0.8980069)
 bones/6/scale = Vector3(1.0000004, 1.0000006, 1.0000002)
 bones/7/position = Vector3(1.8722045e-07, 0.88036793, -5.999363e-07)
-bones/7/rotation = Quaternion(0.13144214, -0.09380126, 0.21610266, 0.9629247)
+bones/7/rotation = Quaternion(0.13144214, -0.09380127, 0.21610264, 0.9629247)
 bones/7/scale = Vector3(0.9999999, 0.99999994, 1)
 bones/8/rotation = Quaternion(-0.5000001, -0.5, -0.49999994, 0.5)
 bones/9/position = Vector3(1.1319361e-09, 0.17910497, -2.1706765e-07)
 bones/9/rotation = Quaternion(-0.6479002, -0.04113031, 0.035072602, 0.75980496)
 bones/9/scale = Vector3(1, 0.99999964, 1.0000002)
 bones/10/position = Vector3(1.1997221e-07, 1.0867592, 6.0649626e-08)
-bones/10/rotation = Quaternion(0.26981205, 0.20137885, 0.6193309, 0.7092794)
+bones/10/rotation = Quaternion(0.26981205, 0.20137885, 0.61933094, 0.7092794)
 bones/10/scale = Vector3(1.0000005, 1.0000008, 1.0000002)
 bones/12/position = Vector3(1.6264634e-08, 0.17910506, -9.700247e-08)
-bones/12/rotation = Quaternion(-0.6474605, -1.2558716e-07, -0.042421248, 0.7609174)
+bones/12/rotation = Quaternion(-0.6474605, -1.257365e-07, -0.042421248, 0.7609174)
 bones/12/scale = Vector3(1.0000001, 1.0000001, 0.99999976)
 bones/13/position = Vector3(1.8695692e-07, 1.0867603, 9.006432e-08)
-bones/13/rotation = Quaternion(0.2431072, -0.20137906, -0.63029224, 0.7092793)
+bones/13/rotation = Quaternion(0.2431072, -0.20137908, -0.6302921, 0.7092793)
 bones/13/scale = Vector3(1.0000012, 1.0000005, 0.9999997)
 
 [node name="amy_model" parent="Player/PlayerRun/Mesh/Armature/Skeleton3D" index="0"]
 layers = 2
-surface_material_override/0 = ExtResource("8_ic0uy")
+surface_material_override/0 = SubResource("ShaderMaterial_ikiii")
 
 [node name="WallBounceRay" type="RayCast3D" parent="Player/PlayerRun/Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)

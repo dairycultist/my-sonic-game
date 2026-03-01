@@ -81,3 +81,16 @@ func _process(delta: float) -> void:
 	orient_up = lerp(orient_up, get_floor_normal() if is_on_floor() else Vector3.UP, 10.0 * delta)
 		
 	$Mesh.look_at(orient_up + $Mesh.global_position, Vector3(velocity.x, 0.0, velocity.z) if (Vector2(velocity.x, velocity.z).length_squared() > 1.0) else $Mesh.global_basis.y, true)
+	
+	# animate bones
+	if is_on_floor():
+		if velocity.length_squared() > 1.0:
+			$AnimationPlayer.current_animation = "run"
+			$AnimationPlayer.speed_scale = Vector2(velocity.x, velocity.z).length() * 0.15
+		else:
+			$AnimationPlayer.current_animation = "RESET"
+	else:
+		if velocity.y > 0.0:
+			$AnimationPlayer.current_animation = "jump"
+		else:
+			$AnimationPlayer.current_animation = "fall"

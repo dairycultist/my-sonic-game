@@ -8,7 +8,7 @@ func _ready() -> void:
 	
 	$PlayerBall.disable()
 	
-	$Camera3D.global_position = $PlayerRun.global_position + Vector3(-camera_dist, camera_dist * 0.8, camera_dist)
+	$Camera3D.position = $PlayerRun.position + Vector3(0.0, camera_dist * 0.6, camera_dist)
 	$Camera3D.global_rotation = Vector3(deg_to_rad(-26), -PI / 4, 0)
 
 func _process(delta: float) -> void:

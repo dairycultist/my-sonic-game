@@ -88,7 +88,8 @@ func _process(delta: float) -> void:
 			$AnimationPlayer.current_animation = "run"
 			$AnimationPlayer.speed_scale = Vector2(velocity.x, velocity.z).length() * 0.15
 		else:
-			$AnimationPlayer.current_animation = "RESET"
+			$AnimationPlayer.current_animation = "idle"
+			$AnimationPlayer.speed_scale = 1.5
 	else:
 		if velocity.y > 0.0:
 			$AnimationPlayer.current_animation = "jump"

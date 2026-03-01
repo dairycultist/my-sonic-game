@@ -757,6 +757,10 @@ bones/13/scale = Vector3(1.0000012, 1.0000005, 0.9999997)
 layers = 2
 surface_material_override/0 = ExtResource("8_ic0uy")
 
+[node name="WallBounceRay" type="RayCast3D" parent="Player/PlayerRun/Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+target_position = Vector3(0, 2, 0)
+
 [node name="Collider" type="CollisionShape3D" parent="Player/PlayerRun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_tlwt5")
